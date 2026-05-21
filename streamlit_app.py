@@ -39,7 +39,7 @@ from datetime import datetime, timezone
 # See CHANGELOG.md in the repo for what's in each version.
 # -----------------------------------------------------------------------------
 
-APP_VERSION = "1.0.4"
+APP_VERSION = "1.0.5"
 BUILD_DATE = "2026-05-21"
 from math import floor
 
@@ -108,9 +108,37 @@ def inject_css() -> None:
         border-color: #DDDDDD !important;
     }
     .stRadio label p, .stRadio label span { color: #1A1A1A !important; }
-    /* Hide the dark top toolbar/header that leaks through in embed mode */
-    [data-testid="stHeader"] { background: transparent !important; }
-    [data-testid="stDecoration"] { display: none !important; }
+    /* Hide the dark top toolbar/menu entirely — it's not useful in embed mode
+       and is the main source of the dark stripe at the top. */
+    [data-testid="stHeader"],
+    [data-testid="stToolbar"],
+    [data-testid="stMainMenu"],
+    [data-testid="stStatusWidget"],
+    [data-testid="stDecoration"],
+    header[data-testid="stHeader"],
+    .stDeployButton { display: none !important; }
+
+    /* When the hamburger menu IS opened (e.g. dev mode), force the dropdown
+       to render light. The menu mounts as a portal at body root. */
+    [data-baseweb="popover"],
+    [data-baseweb="menu"],
+    [data-baseweb="menu"] li,
+    [data-baseweb="menu"] li * {
+        background: #FFFFFF !important;
+        color: #1A1A1A !important;
+    }
+    [data-baseweb="menu"] li:hover { background: #F5F5F8 !important; }
+
+    /* Initial loading splash + connection status overlay */
+    .stConnectionStatus,
+    .stConnectionStatus *,
+    [data-testid="stConnectionStatus"],
+    [data-testid="stStatusWidget"] {
+        background: #FFFFFF !important;
+        color: #1A1A1A !important;
+    }
+    /* The pre-mount skeleton Streamlit shows while the app is booting */
+    .stAppDeployButton, .stSkeleton { background: #FFFFFF !important; }
 
     /* Space Grotesk via the root — cascades to text elements */
     html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
