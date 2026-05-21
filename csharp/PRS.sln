@@ -1,0 +1,22 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRS.Api", "PRS.Api\PRS.Api.csproj", "{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PRS.Api.Tests", "PRS.Api.Tests\PRS.Api.Tests.csproj", "{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A02}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A9F0A1A-1111-4B3D-A0A0-0A0A0A0A0A02}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

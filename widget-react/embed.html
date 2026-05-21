@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PRS Widget — Embed example (post-build)</title>
+  <!--
+    This is what users embed on their own page AFTER running `npm run build`.
+    The build produces dist/prs-widget.js and dist/prs-widget.css.
+    Host them on any CDN or static file server, then point script/link tags at them.
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- 1. Widget styles -->
+  <link rel="stylesheet" href="./dist/prs-widget.css">
+</head>
+<body>
+  <h1>Your existing page</h1>
+  <p>Existing content here…</p>
+
+  <!-- 2. Mount point -->
+  <div id="prs-widget"></div>
+
+  <!-- 3. Widget bundle (includes React/ReactDOM inlined) -->
+  <script src="./dist/prs-widget.js"></script>
+
+  <!-- 4. Initialize -->
+  <script>
+    PRSWidget.mount('prs-widget', {
+      // Backend URL for live Steam prices (Mode A). Omit to disable Mode A.
+      apiUrl: 'https://api.your-platform.com',
+
+      // Optional fallback link to full Streamlit app.
+      streamlitUrl: 'https://prs-publishers.streamlit.app',
+
+      // UI defaults
+      defaultMode: 'base_usd',
+      defaultUsd: 29.99,
+      primaryColor: '#4600FF',
+    });
+  </script>
+</body>
+</html>
