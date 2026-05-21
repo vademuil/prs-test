@@ -6,6 +6,16 @@
 Версия отображается в правом нижнем углу приложения (`PRS vX.Y.Z · YYYY-MM-DD`).
 Если в эмбеде на сайте стоит другая версия — значит редеплой ещё не прошёл.
 
+## [1.0.4] — 2026-05-21
+
+### Fixed
+- Тёмная тема всё ещё прорывалась когда Streamlit-приложение эмбедилось в iframe (видно было: чёрная полоса вверху, чёрный фон у radio и AppID input). Причины:
+  1. `.streamlit/config.toml` мог не доехать на GitHub (это скрытый файл)
+  2. URL iframe не содержал `embed_options=light_theme`
+- Усилил CSS-overrides для BaseWeb-виджетов Streamlit (text input, select, radio, textarea, number input) с явным `background: #FFFFFF !important`
+- Скрыты `stHeader` и `stDecoration` чтобы тёмный toolbar не светился в embed-режиме
+- Embed-сниппеты в `widget/embed.html` и `widget/embed.js` теперь добавляют `embed_options=light_theme` в URL
+
 ## [1.0.3] — 2026-05-15
 
 ### Changed

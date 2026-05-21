@@ -13,7 +13,7 @@
 (function () {
   // ---- Configuration -------------------------------------------------------
   var STREAMLIT_URL = 'https://prs-publishers.streamlit.app';
-  var EMBED_PARAMS  = '?embed=true&embed_options=light_theme';
+  var EMBED_PARAMS  = '?embed=true&embed_options=light_theme&embed_options=show_padding';
   var MIN_HEIGHT_PX = 1400;        // initial height; auto-resizes if the app sends messages
   var BORDER_RADIUS = '12px';
 

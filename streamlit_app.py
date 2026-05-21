@@ -39,8 +39,8 @@ from datetime import datetime, timezone
 # See CHANGELOG.md in the repo for what's in each version.
 # -----------------------------------------------------------------------------
 
-APP_VERSION = "1.0.3"
-BUILD_DATE = "2026-05-15"
+APP_VERSION = "1.0.4"
+BUILD_DATE = "2026-05-21"
 from math import floor
 
 import pandas as pd
@@ -79,12 +79,38 @@ def inject_css() -> None:
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
     /* Force light color-scheme everywhere so the browser doesn't apply
-       a dark-mode user agent stylesheet to form controls, scrollbars, etc. */
+       a dark-mode user agent stylesheet to form controls, scrollbars, etc.
+       Belt-and-suspenders: even when the .streamlit/config.toml isn't picked
+       up (e.g. user deployed without uploading the hidden folder), these
+       overrides keep the app on a white background. */
     :root, html, body, .stApp { color-scheme: light !important; }
-    html, body, .stApp, [data-testid="stAppViewContainer"] {
+    html, body, .stApp,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stHeader"],
+    [data-testid="stMain"],
+    [data-testid="stMainBlockContainer"],
+    [data-testid="stToolbar"] {
         background-color: #FFFFFF !important;
         color: #1A1A1A !important;
     }
+    /* Streamlit's BaseWeb form widgets carry their own theme styling.
+       Override their dark surfaces explicitly. */
+    [data-baseweb="input"] input,
+    [data-baseweb="select"] > div,
+    [data-baseweb="select"] input,
+    [data-baseweb="textarea"] textarea,
+    .stTextInput input, .stNumberInput input,
+    .stSelectbox div[role="combobox"],
+    .stRadio label,
+    .stRadio > div {
+        background-color: #FFFFFF !important;
+        color: #1A1A1A !important;
+        border-color: #DDDDDD !important;
+    }
+    .stRadio label p, .stRadio label span { color: #1A1A1A !important; }
+    /* Hide the dark top toolbar/header that leaks through in embed mode */
+    [data-testid="stHeader"] { background: transparent !important; }
+    [data-testid="stDecoration"] { display: none !important; }
 
     /* Space Grotesk via the root — cascades to text elements */
     html, body, .stApp, [data-testid="stAppViewContainer"], [data-testid="stSidebar"] {
