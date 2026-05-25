@@ -62,7 +62,7 @@
   };
 
   const CURRENCY_INFO = {
-    USD:       {pkg:'ROW',     name:'US Dollar'},
+    USD:       {pkg:'ROW',     name:'US Dollar',         vat:0.0},  // Steam shows USD ex-VAT; force 0 to override country fallback
     EUR:       {pkg:'ROW',     name:'Euro',              vat:0.21},
     GBP:       {pkg:'ROW',     name:'British Pound'},
     AUD:       {pkg:'ROW',     name:'Australian Dollar'},

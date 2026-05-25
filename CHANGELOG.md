@@ -6,6 +6,14 @@
 Версия отображается в правом нижнем углу приложения (`PRS vX.Y.Z · YYYY-MM-DD`).
 Если в эмбеде на сайте стоит другая версия — значит редеплой ещё не прошёл.
 
+## [1.0.7] — 2026-05-22
+
+### Fixed (важный баг)
+- **USD-тир неправильно подбирал VAT.** `CURRENCY_INFO["USD"]` имел `vat_override = None`, поэтому при дедупликации VAT брался от страны-представителя. Steam Store API возвращает `currency: "USD"` для разных стран; первая по алфавиту становилась представителем — и если это были Багамы (BS), то VAT = 10%. Результат: Current Publisher Share USD для USD-строки получался на 10% меньше правильного значения (например для $69.99 при dist=20% показывало $50.90 вместо корректных $55.99).
+- Решение: `vat_override = 0.0` для USD-тира (Steam показывает USD-цены без inclusive VAT). Аналогично уже было сделано для USD_CIS/USD_SASIA/USD_MENA/USD_LATAM.
+- Исправлено в 4 кодовых базах: `streamlit_app.py`, `widget/prs-widget.js`, `widget-react/src/constants.ts`, `csharp/PRS.Api/Domain/CurrencyInfo.cs`.
+- Баг проявлялся **только в Mode A (live Steam)**. В Mode B (Valve матрица) представителем USD всегда был US (по `TIER_REPRESENTATIVE_CC`), у которого VAT=0 — поэтому в наших Mode B тестах баг не ловился.
+
 ## [1.0.6] — 2026-05-22
 
 ### Changed

@@ -39,7 +39,7 @@ from datetime import datetime, timezone
 # See CHANGELOG.md in the repo for what's in each version.
 # -----------------------------------------------------------------------------
 
-APP_VERSION = "1.0.6"
+APP_VERSION = "1.0.7"
 BUILD_DATE = "2026-05-22"
 from math import floor
 
@@ -611,7 +611,7 @@ USD_TIER_BY_CC: dict[str, str] = {
 
 CURRENCY_INFO: dict[str, dict] = {
     # ROW: EU, AU, CA, NZ, NO, PL, CH, GB, US
-    "USD":       {"package": "ROW",     "name": "US Dollar",         "vat_override": None},
+    "USD":       {"package": "ROW",     "name": "US Dollar",         "vat_override": 0.0},  # Steam shows USD without inclusive VAT — force 0 to avoid being polluted by representative cc (e.g. Bahamas → 10%)
     "EUR":       {"package": "ROW",     "name": "Euro",              "vat_override": 0.21},
     "GBP":       {"package": "ROW",     "name": "British Pound",     "vat_override": None},
     "AUD":       {"package": "ROW",     "name": "Australian Dollar", "vat_override": None},

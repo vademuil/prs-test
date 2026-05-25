@@ -12,7 +12,7 @@ public static class CurrencyInfo
     public static readonly IReadOnlyDictionary<string, Info> All = new Dictionary<string, Info>
     {
         // ----- ROW -----
-        ["USD"]       = new("ROW",     "US Dollar",          null),
+        ["USD"]       = new("ROW",     "US Dollar",          0.0),  // Steam shows USD ex-VAT; force 0 (otherwise representative cc like BS = 10% pollutes)
         ["EUR"]       = new("ROW",     "Euro",               0.21),
         ["GBP"]       = new("ROW",     "British Pound",      null),
         ["AUD"]       = new("ROW",     "Australian Dollar",  null),
