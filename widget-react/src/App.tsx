@@ -336,7 +336,7 @@ function PackageCardView({ pkg, block, targetCurrency, fxTarget, detailed, distS
             <th>Tier</th>
             <th className="num">Current SRP</th>
             <th className="num">Current SRP in {targetCurrency}</th>
-            {detailed && <th className="num">Current Publisher Share USD</th>}
+            {detailed && <th className="num">Current Publisher Share {targetCurrency}</th>}
             <th className="num">Recommended SRP in {targetCurrency}</th>
             <th className="num">Recommended Local Price</th>
             <th className="num">Increase %</th>
@@ -399,7 +399,10 @@ function RowView({ row, targetCurrency, fxTarget, detailed, shareFactor }: RowVi
   const curInTarget = row.currentRetailUsd != null ? row.currentRetailUsd * fxTarget : null;
   const recInTarget = row.recSrpUsd != null ? row.recSrpUsd * fxTarget : null;
 
-  const curPubShare = row.currentNetUsd != null ? row.currentNetUsd * shareFactor : null;
+  // Pub Share NET USD × (1 - dist_share/100) × fx_target → in selected currency
+  const curPubShare = row.currentNetUsd != null
+    ? row.currentNetUsd * shareFactor * fxTarget
+    : null;
 
   const incNode = (row.isChanged && row.increasePct > 0)
     ? <span className="price-new">+{row.increasePct.toFixed(1)}%</span>
@@ -414,11 +417,7 @@ function RowView({ row, targetCurrency, fxTarget, detailed, shareFactor }: RowVi
       <td className="prs-num-cell">{fmtPrice(row.currentLocalPrice, row.tier)}</td>
       <td className="prs-num-cell">{fmtPrice(curInTarget, targetCurrency)}</td>
       {detailed && (
-        <td className="prs-num-cell">
-          {curPubShare != null
-            ? <>${curPubShare.toFixed(2)}</>
-            : <span className="prs-dash">—</span>}
-        </td>
+        <td className="prs-num-cell">{fmtPrice(curPubShare, targetCurrency)}</td>
       )}
       <td className="prs-num-cell">
         {row.isChanged

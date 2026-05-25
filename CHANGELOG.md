@@ -6,6 +6,13 @@
 Версия отображается в правом нижнем углу приложения (`PRS vX.Y.Z · YYYY-MM-DD`).
 Если в эмбеде на сайте стоит другая версия — значит редеплой ещё не прошёл.
 
+## [1.0.6] — 2026-05-22
+
+### Changed
+- На вкладке Detailed колонка **Current Publisher Share USD** теперь следует за селектором «Convert prices to» — переименовывается в `Current Publisher Share {X}` и значения пересчитываются по `fx_target`. Раньше колонка была всегда в USD
+- Изменения и в Streamlit-приложении, и в React-виджете
+- CSV экспорт оставлен как был — `Current Publisher Share USD` / `Recommended Publisher Share USD` всегда в USD (для однозначности при выгрузке)
+
 ## [1.0.5] — 2026-05-21
 
 ### Fixed

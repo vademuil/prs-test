@@ -39,8 +39,8 @@ from datetime import datetime, timezone
 # See CHANGELOG.md in the repo for what's in each version.
 # -----------------------------------------------------------------------------
 
-APP_VERSION = "1.0.5"
-BUILD_DATE = "2026-05-21"
+APP_VERSION = "1.0.6"
+BUILD_DATE = "2026-05-22"
 from math import floor
 
 import pandas as pd
@@ -1503,8 +1503,9 @@ def _render_package_card(
         if show_pub_share:
             cur_net = r.get("current_net_usd")
             if cur_net is not None:
-                cur_pub_share = cur_net * share_factor
-                pub_share_html = f'${cur_pub_share:,.2f}'
+                # NET USD × (1 - dist_share/100) × fx_target → in selected currency
+                cur_pub_share_in_target = cur_net * share_factor * fx_target
+                pub_share_html = _fmt_price(cur_pub_share_in_target, target_currency)
             else:
                 pub_share_html = '<span style="color:#bbb">—</span>'
             cells.append(f'<td class="num-cell">{pub_share_html}</td>')
@@ -1523,7 +1524,7 @@ def _render_package_card(
         f'<th class="num">Current SRP in {target_currency}</th>',
     ]
     if show_pub_share:
-        header_cells.append('<th class="num">Current Publisher Share USD</th>')
+        header_cells.append(f'<th class="num">Current Publisher Share {target_currency}</th>')
     header_cells.extend([
         f'<th class="num">Recommended SRP in {target_currency}</th>',
         '<th class="num">Recommended Local Price</th>',
